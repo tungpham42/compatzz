@@ -1,0 +1,40 @@
+/* -- RESET */
+
+* { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
+* { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+select, input, button { -webkit-appearance: none; cursor: pointer; }
+ol, ul { list-style: none; }
+:focus { outline: none; }
+
+
+/* -- BASE */
+
+html {
+    font-family: sans-serif;
+    font-size: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    font: 16px/26px "Open Sans", sans-serif;
+    color: #000;
+    background: #fff;
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    color: #000;
+}
+
+/* -- LAYOUT */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 0.5em;
+}
