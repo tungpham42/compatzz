@@ -8,6 +8,17 @@ ol, ul { list-style: none; }
 :focus { outline: none; }
 
 
+/* -- COLOR PALETTE */
+i {
+ color: #aec0ce;
+ color: #505b67;
+ color: #a2a9ae;
+ color: #3b4f5e;
+ color: #6a90ab;
+ color: #a0776d;
+ color: #263a4a;
+}
+
 /* -- BASE */
 
 html {
@@ -19,9 +30,10 @@ html {
 }
 
 body {
-    font: 16px/26px "Open Sans", sans-serif;
-    color: #000;
-    background: #fff;
+    font: 16px "Open Sans", sans-serif;
+    line-height: 1.4;
+    color: #505b67;
+    background: #fbfbfd;
 }
 
 img {
@@ -29,7 +41,14 @@ img {
 }
 
 a {
-    color: #000;
+    color: #545863;
+}
+
+h1 {
+    font-size: 4em;
+    text-align: center;
+    /*font-weight: bold;*/
+    text-align: justify;
 }
 
 /* -- LAYOUT */
@@ -37,4 +56,21 @@ a {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 0.5em;
+}
+
+#intro {
+    padding: 100px 0 20px;
+}
+
+#main {
+    padding: 40px 0;
+    border-top: 1px solid #d6d5da;
+    border-bottom: 1px solid #e1e2e7;
+    background: #f4f5f9;
+    box-shadow: 0 1px 0 0 #ebeaef inset;
+}
+
+#info {
+    padding: 20px 0;
+    border-top: 1px solid #feffff;
 }
