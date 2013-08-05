@@ -51,7 +51,7 @@ h1, h3 {
 }
 
 h3 {
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 /* -- LAYOUT */
@@ -161,7 +161,11 @@ h3 {
 
 .share-buttons {
     float: right;
-    margin-top: 6px;
+    /*margin-top: 6px;*/
+}
+
+.share-buttons .pluso-more {
+    display: none !important;
 }
 
 
