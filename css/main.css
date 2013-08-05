@@ -9,15 +9,15 @@ ol, ul { list-style: none; }
 
 
 /* -- COLOR PALETTE */
-i {
- color: #aec0ce;
- color: #505b67;
- color: #a2a9ae;
- color: #3b4f5e;
- color: #6a90ab;
- color: #a0776d;
- color: #263a4a;
-}
+/*i {*/
+ /*color: #aec0ce;*/
+ /*color: #505b67;*/
+ /*color: #a2a9ae;*/
+ /*color: #3b4f5e;*/
+ /*color: #6a90ab;*/
+ /*color: #a0776d;*/
+ /*color: #263a4a;*/
+/*}*/
 
 /* -- BASE */
 
@@ -44,22 +44,25 @@ a {
     color: #545863;
 }
 
-h1 {
-    font-size: 4em;
-    text-align: center;
-    /*font-weight: bold;*/
-    text-align: justify;
+h1, h3 {
+    text-transform: uppercase;
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.5em;
 }
 
 /* -- LAYOUT */
 .container {
-    max-width: 900px;
+    max-width: 720px;
     margin: 0 auto;
     padding: 0 0.5em;
 }
 
 #intro {
     padding: 100px 0 20px;
+
 }
 
 #main {
@@ -70,6 +73,83 @@ h1 {
     box-shadow: 0 1px 0 0 #ebeaef inset;
 }
 
+.rhythm {
+    margin: 10px 0 30px;
+    overflow: hidden;
+}
+
+.rhythm h1 {
+    float: left;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.rhythm .percent {
+    float: right;
+}
+
+.rhythm .percentage {
+    height: 8px;
+    margin-top: 30px;
+    overflow: hidden;
+    clear: both;
+    background: #dfe2e9;
+}
+
+.percentage-bar {
+    float: left;
+    height: 100%;
+    background: #a3abbe;
+}
+
+.physical .percentage-bar {
+    background: #ef7955;
+}
+
+.emotional .percentage-bar {
+    background: #4fc281;
+}
+
+.intellectual .percentage-bar {
+    background: #4b98dc;
+}
+
+.dates {
+    text-align: center;
+}
+
+.date {
+    display: inline-block;
+    padding: 10px;
+}
+
+.date:hover {
+    background: #dfe2e9;
+}
+
+.date select {
+    padding: 5px 15px;
+    margin: 0 5px;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+    box-shadow: 0 1px 1px 0 #a3abbe inset;
+    color: #505b67;
+    background: #fbfbfd;
+    text-transform: uppercase;
+}
+
+.date select:hover, .date select:focus {
+    color: #ef7955;
+}
+
+.separator {
+    padding: 10px;
+    color: #ef7955;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+/* -- FOOTER */
 #info {
     padding: 20px 0;
     border-top: 1px solid #feffff;
