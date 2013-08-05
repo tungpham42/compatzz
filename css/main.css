@@ -45,24 +45,25 @@ a {
 }
 
 h1, h3 {
+    margin-bottom: 0.3em;
     text-transform: uppercase;
     font-size: 2em;
 }
 
 h3 {
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 /* -- LAYOUT */
 .container {
     max-width: 720px;
+    min-width: 300px;
     margin: 0 auto;
     padding: 0 0.5em;
 }
 
 #intro {
-    padding: 100px 0 20px;
-
+    padding: 80px 0 20px;
 }
 
 #main {
@@ -76,12 +77,12 @@ h3 {
 .rhythm {
     margin: 10px 0 30px;
     overflow: hidden;
+    font-weight: bold;
 }
 
 .rhythm h1 {
     float: left;
     font-size: 1em;
-    font-weight: bold;
 }
 
 .rhythm .percent {
@@ -89,8 +90,7 @@ h3 {
 }
 
 .rhythm .percentage {
-    height: 8px;
-    margin-top: 30px;
+    height: 6px;
     overflow: hidden;
     clear: both;
     background: #dfe2e9;
@@ -100,6 +100,8 @@ h3 {
     float: left;
     height: 100%;
     background: #a3abbe;
+    -webkit-transition: width 0.6s ease;
+    transition: width 0.6s ease;
 }
 
 .physical .percentage-bar {
@@ -121,6 +123,9 @@ h3 {
 .date {
     display: inline-block;
     padding: 10px;
+    white-space: nowrap;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .date:hover {
@@ -131,11 +136,9 @@ h3 {
     padding: 5px 15px;
     margin: 0 5px;
     border-radius: 0;
-    border-bottom: 2px solid transparent;
     box-shadow: 0 1px 1px 0 #a3abbe inset;
     color: #505b67;
     background: #fbfbfd;
-    text-transform: uppercase;
 }
 
 .date select:hover, .date select:focus {
@@ -143,14 +146,33 @@ h3 {
 }
 
 .separator {
-    padding: 10px;
+    padding: 0 10px;
     color: #ef7955;
     font-weight: bold;
     font-size: 1.5em;
+    line-height: 1;
 }
 
 /* -- FOOTER */
 #info {
     padding: 20px 0;
     border-top: 1px solid #feffff;
+}
+
+
+/* -- MEDIA QUERIES */
+@media only screen and (max-width: 660px) {
+
+    .separator {
+        display: block;
+    }
+
+    #intro {
+        padding-top: 30px;
+    }
+
+    #intro h1 {
+        text-align: center;
+    }
+
 }
