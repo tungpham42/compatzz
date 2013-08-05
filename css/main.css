@@ -159,6 +159,11 @@ h3 {
     border-top: 1px solid #feffff;
 }
 
+.share-buttons {
+    float: right;
+    margin-top: 6px;
+}
+
 
 /* -- MEDIA QUERIES */
 @media only screen and (max-width: 660px) {
