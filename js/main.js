@@ -7,6 +7,7 @@
     var Main = {
         init: function() {
             this.appendDateOptions();
+            this.watchDateChange();
             this.resizeBars();
         },
 
@@ -29,9 +30,9 @@
                 years.push('<option value="' + y + '">' + y + '</option>');
             }
 
-            $('select[data-option=dd]').append(days.join(''));
-            $('select[data-option=mm]').append(months.join(''));
-            $('select[data-option=yyyy]').append(years.join(''));
+            $('select[name^=dd]').append(days.join(''));
+            $('select[name^=mm]').append(months.join(''));
+            $('select[name^=yyyy]').append(years.join(''));
         },
 
         resizeBars: function() {
@@ -43,6 +44,25 @@
                 $('.percentage-bar', $context).width(val);
             });
 
+        },
+
+        watchDateChange: function() {
+            var $selectInputs = $('#date-input select');
+
+            $selectInputs.change(function() {
+                var emptyOptions = $selectInputs.filter(function() {return !$(this).val();});
+
+                // calculate when all date options selected
+                if (emptyOptions.length == 0) {
+                    Main.calculateMaximums($selectInputs.serializeArray());
+                }
+            });
+        },
+
+        calculateMaximums: function(dataData) {
+            $.each(dataData, function(i, option){
+                console.log(option.name + ': ' + option.value);
+            });
         }
     };
 
