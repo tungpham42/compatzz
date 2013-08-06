@@ -99,6 +99,7 @@ h3 {
 .percentage-bar {
     float: left;
     height: 100%;
+    width: 100%;
     background: #a3abbe;
     -webkit-transition: width 0.6s ease;
     transition: width 0.6s ease;
