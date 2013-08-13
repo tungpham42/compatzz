@@ -58,24 +58,30 @@
 
                 // calculate when all date options selected
                 if (emptyOptions.length == 0) {
-                    var compatibility = Main.calculateMaximums($selectInputs.serializeArray());
+                    var inputValues = $selectInputs.serializeArray();
+                    var compatibility = Main.calculateMaximums(inputValues);
+
+                    // draw compatibility graph
                     Main.resizeBars(compatibility);
+
+                    // change URI string to reflect dates
+                    Main.setLocationHash(inputValues);
                 }
             });
         },
 
         // Summed maximum: Compatibility % = 100 * Abs(cos(pi * d / p))
-        calculateMaximums: function(dateOptions) {
+        calculateMaximums: function(inputValues) {
             var firstDate = new Date(
-                parseInt(dateOptions[2].value),
-                parseInt(dateOptions[1].value - 1),
-                parseInt(dateOptions[0].value)
+                parseInt(inputValues[2].value),
+                parseInt(inputValues[1].value - 1),
+                parseInt(inputValues[0].value)
             ); // yyyy, mm, dd
 
             var secondDate = new Date(
-                parseInt(dateOptions[5].value),
-                parseInt(dateOptions[4].value - 1),
-                parseInt(dateOptions[3].value)
+                parseInt(inputValues[5].value),
+                parseInt(inputValues[4].value - 1),
+                parseInt(inputValues[3].value)
             ); // yyyy2, mm2, dd2
 
             // hours * minutes * seconds * milliseconds
@@ -94,6 +100,15 @@
             };
 
             return compatibility;
+        },
+
+        setLocationHash: function(inputValues) {
+            var hashData = [];
+            $.each(inputValues, function(i, obj) {
+                hashData.push(obj.value);
+                if (i == 2) { hashData.push('-'); }
+            });
+            location.hash = hashData.join('');
         }
     };
 
