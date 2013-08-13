@@ -8,7 +8,7 @@
         init: function() {
             this.appendDateOptions();
             this.watchDateChange();
-            // this.setDateByHash(); ?
+            this.setDatesByHash();
         },
 
         appendDateOptions: function() {
@@ -109,6 +109,22 @@
                 if (i == 2) { hashData.push('-'); }
             });
             location.hash = hashData.join('');
+        },
+
+        setDatesByHash: function() {
+            var hash = location.hash.slice(1);
+            var validHash = hash.match(/^(\d{8})-(\d{8})$/);
+
+            if (validHash) {
+                $('select[name=dd]').val(hash.slice(0, 2));
+                $('select[name=mm]').val(hash.slice(2, 4));
+                $('select[name=yyyy]').val(hash.slice(4, 8));
+                $('select[name=dd2]').val(hash.slice(9, 11));
+                $('select[name=mm2]').val(hash.slice(11, 13));
+                $('select[name=yyyy2]').val(hash.slice(13, 17));
+
+                $('#date-input select').change();
+            }
         }
     };
 
