@@ -38,11 +38,12 @@
         },
 
         resizeBars: function(graphData) {
-            var cycles = { physical: '81%', emotional: '92%', intellectual: '66%', average: '90%' };
+            // { physical: '81%', emotional: '92%', intellectual: '66%', average: '90%' };
             $.each(graphData, function(i, val) {
                 val = Math.round(val) + '%';
+
                 var $context = $('.' + i);
-                $context.attr('title', $context.attr('title') + ': ' + val);
+                $context.attr( 'title', $context.attr('title').replace(/[0-9]+%/g, val) );
                 $('.percent', $context).html(val);
                 $('.percentage-bar', $context).width(val);
             });
