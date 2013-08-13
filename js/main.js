@@ -8,6 +8,8 @@
         init: function() {
             this.appendDateOptions();
             this.watchDateChange();
+            // this.setDateByHash(); ?
+
             this.resizeBars();
         },
 
@@ -26,7 +28,9 @@
             }
 
             // years range
-            for (var y = 2000; y >= 1950; y--) {
+            var yearStart = (new Date()).getFullYear() - 13;
+
+            for (var y = yearStart; y >= 1950; y--) {
                 years.push('<option value="' + y + '">' + y + '</option>');
             }
 
