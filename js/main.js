@@ -9,8 +9,6 @@
             this.appendDateOptions();
             this.watchDateChange();
             // this.setDateByHash(); ?
-
-            this.resizeBars();
         },
 
         appendDateOptions: function() {
@@ -39,9 +37,10 @@
             $('select[name^=yyyy]').append(years.join(''));
         },
 
-        resizeBars: function() {
-            var cycles = { physical: '81%', emotional: '92%', intellectual: '66%', total: '90%' };
-            $.each(cycles, function(i, val) {
+        resizeBars: function(graphData) {
+            var cycles = { physical: '81%', emotional: '92%', intellectual: '66%', average: '90%' };
+            $.each(graphData, function(i, val) {
+                val = Math.round(val) + '%';
                 var $context = $('.' + i);
                 $context.attr('title', $context.attr('title') + ': ' + val);
                 $('.percent', $context).html(val);
@@ -58,15 +57,42 @@
 
                 // calculate when all date options selected
                 if (emptyOptions.length == 0) {
-                    Main.calculateMaximums($selectInputs.serializeArray());
+                    var compatibility = Main.calculateMaximums($selectInputs.serializeArray());
+                    Main.resizeBars(compatibility);
                 }
             });
         },
 
-        calculateMaximums: function(dataData) {
-            $.each(dataData, function(i, option){
-                console.log(option.name + ': ' + option.value);
-            });
+        // Summed maximum: Compatibility % = 100 * Abs(cos(pi * d / p))
+        calculateMaximums: function(dateOptions) {
+            var firstDate = new Date(
+                parseInt(dateOptions[2].value),
+                parseInt(dateOptions[1].value - 1),
+                parseInt(dateOptions[0].value)
+            ); // yyyy, mm, dd
+
+            var secondDate = new Date(
+                parseInt(dateOptions[5].value),
+                parseInt(dateOptions[4].value - 1),
+                parseInt(dateOptions[3].value)
+            ); // yyyy2, mm2, dd2
+
+            // hours * minutes * seconds * milliseconds
+            var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (24 * 60 * 60 * 1000)));
+
+            var compatibilityPhysical = 100 * Math.abs(Math.cos(Math.PI * diffDays / 23));
+            var compatibilityEmotional = 100 * Math.abs(Math.cos(Math.PI * diffDays / 28));
+            var compatibilityIntellectual = 100 * Math.abs(Math.cos(Math.PI * diffDays / 33));
+            var compatibilityAverage = (compatibilityPhysical + compatibilityEmotional + compatibilityIntellectual) / 3;
+
+            var compatibility = {
+                'physical': compatibilityPhysical,
+                'emotional': compatibilityEmotional,
+                'intellectual': compatibilityIntellectual,
+                'average': compatibilityAverage
+            };
+
+            return compatibility;
         }
     };
 
