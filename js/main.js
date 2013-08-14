@@ -55,16 +55,22 @@
                     Main.changeLocationHash(inputValues);
 
                     // remember first date
-                    Main.saveDate();
+                    Main.saveDate(inputValues);
                 }
             });
         },
 
         preloadDates: function() {
             // load first date from localstorage
-            // if (supportsLocalStorage) {}
+            if (this.supportsLocalStorage) {
+                var storedDate = localStorage['ddmmyyy'];
 
-            // set from location hash
+                $('select[name=dd]').val( storedDate.slice(0, 2) );
+                $('select[name=mm]').val( storedDate.slice(2, 4) );
+                $('select[name=yyyy]').val( storedDate.slice(4, 8) );
+            }
+
+            // set dates from location hash
             var hash = location.hash.slice(1);
             var validHash = hash.match(/^(\d{8})-(\d{8})$/);
 
@@ -142,8 +148,16 @@
             location.hash = hashData.join('');
         },
 
-        saveDate: function() {
+        saveDate: function(inputValues) {
+            if (!this.supportsLocalStorage()) { return false; }
 
+            var storedDateValues = [];
+            for (var i = 0; i <= 2; i++) {
+                storedDateValues.push(inputValues[i].value);
+            }
+
+            // save first date to localstorage
+            localStorage['ddmmyyy'] = storedDateValues.join('');
         },
 
         // verify if local storage supported
