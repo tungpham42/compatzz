@@ -114,6 +114,9 @@
                 $context.attr( 'title', $context.attr('title').replace(/[0-9]+%/g, val) );
                 $('.percent', $context).html(val);
                 $('.percentage-bar', $context).width(val);
+
+                // update page title as well
+                $('title').html($('title').html().replace(/[0-9]+%/g, val));
             });
 
         },
