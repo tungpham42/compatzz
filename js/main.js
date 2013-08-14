@@ -107,7 +107,8 @@
         resizeBars: function(graphData) {
             // { physical: '81%', emotional: '92%', intellectual: '66%', average: '90%' };
             $.each(graphData, function(i, val) {
-                val = Math.round(val) + '%';
+                //val = Math.round(val) + '%';
+                val = val + '%';
 
                 var $context = $('.' + i);
                 $context.attr( 'title', $context.attr('title').replace(/[0-9]+%/g, val) );
@@ -134,10 +135,10 @@
             // hours * minutes * seconds * milliseconds
             var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (24 * 60 * 60 * 1000)));
 
-            var compatibilityPhysical = 100 * Math.abs(Math.cos(Math.PI * diffDays / 23));
-            var compatibilityEmotional = 100 * Math.abs(Math.cos(Math.PI * diffDays / 28));
-            var compatibilityIntellectual = 100 * Math.abs(Math.cos(Math.PI * diffDays / 33));
-            var compatibilityAverage = (compatibilityPhysical + compatibilityEmotional + compatibilityIntellectual) / 3;
+            var compatibilityPhysical = Math.round(100 * Math.abs(Math.cos(Math.PI * diffDays / 23)));
+            var compatibilityEmotional = Math.round(100 * Math.abs(Math.cos(Math.PI * diffDays / 28)));
+            var compatibilityIntellectual = Math.round(100 * Math.abs(Math.cos(Math.PI * diffDays / 33)));
+            var compatibilityAverage = Math.round((compatibilityPhysical + compatibilityEmotional + compatibilityIntellectual) / 3);
 
             var compatibility = {
                 'physical': compatibilityPhysical,
