@@ -65,13 +65,15 @@
             if (this.supportsLocalStorage) {
                 var storedDate = localStorage['ddmmyyy'];
 
-                $('select[name=dd]').val( storedDate.slice(0, 2) );
-                $('select[name=mm]').val( storedDate.slice(2, 4) );
-                $('select[name=yyyy]').val( storedDate.slice(4, 8) );
+                if (storedDate) {
+                    $('select[name=dd]').val( storedDate.slice(0, 2) );
+                    $('select[name=mm]').val( storedDate.slice(2, 4) );
+                    $('select[name=yyyy]').val( storedDate.slice(4, 8) );
+                }
             }
 
             // set dates from location hash
-            var hash = location.hash.slice(1);
+            var hash = window.location.hash.slice(1);
             var validHash = hash.match(/^(\d{8})-(\d{8})$/);
 
             if (validHash) {
@@ -145,7 +147,7 @@
                 hashData.push(obj.value);
                 if (i == 2) { hashData.push('-'); }
             });
-            location.hash = hashData.join('');
+            window.location.hash = hashData.join('');
         },
 
         saveDate: function(inputValues) {
