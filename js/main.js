@@ -77,20 +77,28 @@
             var validHash = hash.match(/^(\d{8})-(\d{8})$/);
 
             if (validHash) {
-                var dd = hash.slice(0, 2);
-                var mm = hash.slice(2, 4);
-                var yyyy = hash.slice(4, 8);
-                var dd2 = hash.slice(9, 11);
-                var mm2 = hash.slice(11, 13);
-                var yyyy2 = hash.slice(13, 17);
+                var dd = hash.slice(0, 2),
+                    mm = hash.slice(2, 4),
+                    yyyy = hash.slice(4, 8),
+                    dd2 = hash.slice(9, 11),
+                    mm2 = hash.slice(11, 13),
+                    yyyy2 = hash.slice(13, 17);
 
                 // set only if such values exist
-                $('select[name=dd] > option[value='+dd+']').length ? $('select[name=dd]').val(dd) : null;
-                $('select[name=mm] > option[value='+mm+']').length ? $('select[name=mm]').val(mm) : null;
-                $('select[name=yyyy] > option[value='+yyyy+']').length ? $('select[name=yyyy]').val(yyyy) : null;
-                $('select[name=dd2] > option[value='+dd2+']').length ? $('select[name=dd2]').val(dd2) : null;
-                $('select[name=mm2] > option[value='+mm2+']').length ? $('select[name=mm2]').val(mm2) : null;
-                $('select[name=yyyy2] > option[value='+yyyy2+']').length ? $('select[name=yyyy2]').val(yyyy2) : null;
+                if ( $('select[name=dd] > option[value='+dd+']').length
+                    && $('select[name=mm] > option[value='+mm+']').length
+                    && $('select[name=yyyy] > option[value='+yyyy+']').length
+                    && $('select[name=dd2] > option[value='+dd2+']').length
+                    && $('select[name=mm2] > option[value='+mm2+']').length
+                    && $('select[name=yyyy2] > option[value='+yyyy2+']').length )
+                {
+                    $('select[name=dd]').val(dd);
+                    $('select[name=mm]').val(mm);
+                    $('select[name=yyyy]').val(yyyy);
+                    $('select[name=dd2]').val(dd2);
+                    $('select[name=mm2]').val(mm2);
+                    $('select[name=yyyy2]').val(yyyy2);
+                }
 
                 $('#date-input select').change();
             }
