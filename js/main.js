@@ -8,7 +8,7 @@
         init: function() {
             this.appendDateOptions();
             this.watchDateChange();
-            this.setDatesByHash();
+            this.preloadDates();
         },
 
         appendDateOptions: function() {
@@ -37,19 +37,6 @@
             $('select[name^=yyyy]').append(years.join(''));
         },
 
-        resizeBars: function(graphData) {
-            // { physical: '81%', emotional: '92%', intellectual: '66%', average: '90%' };
-            $.each(graphData, function(i, val) {
-                val = Math.round(val) + '%';
-
-                var $context = $('.' + i);
-                $context.attr( 'title', $context.attr('title').replace(/[0-9]+%/g, val) );
-                $('.percent', $context).html(val);
-                $('.percentage-bar', $context).width(val);
-            });
-
-        },
-
         watchDateChange: function() {
             var $selectInputs = $('#date-input select');
 
@@ -65,9 +52,53 @@
                     Main.resizeBars(compatibility);
 
                     // change URI string to reflect dates
-                    Main.setLocationHash(inputValues);
+                    Main.changeLocationHash(inputValues);
+
+                    // remember first date
+                    Main.saveDate();
                 }
             });
+        },
+
+        preloadDates: function() {
+            // load first date from localstorage
+            // if (supportsLocalStorage) {}
+
+            // set from location hash
+            var hash = location.hash.slice(1);
+            var validHash = hash.match(/^(\d{8})-(\d{8})$/);
+
+            if (validHash) {
+                var dd = hash.slice(0, 2);
+                var mm = hash.slice(2, 4);
+                var yyyy = hash.slice(4, 8);
+                var dd2 = hash.slice(9, 11);
+                var mm2 = hash.slice(11, 13);
+                var yyyy2 = hash.slice(13, 17);
+
+                // set only if such values exist
+                $('select[name=dd] > option[value='+dd+']').length ? $('select[name=dd]').val(dd) : null;
+                $('select[name=mm] > option[value='+mm+']').length ? $('select[name=mm]').val(mm) : null;
+                $('select[name=yyyy] > option[value='+yyyy+']').length ? $('select[name=yyyy]').val(yyyy) : null;
+                $('select[name=dd2] > option[value='+dd2+']').length ? $('select[name=dd2]').val(dd2) : null;
+                $('select[name=mm2] > option[value='+mm2+']').length ? $('select[name=mm2]').val(mm2) : null;
+                $('select[name=yyyy2] > option[value='+yyyy2+']').length ? $('select[name=yyyy2]').val(yyyy2) : null;
+
+                $('#date-input select').change();
+            }
+        },
+
+        resizeBars: function(graphData) {
+            // { physical: '81%', emotional: '92%', intellectual: '66%', average: '90%' };
+            $.each(graphData, function(i, val) {
+                val = Math.round(val) + '%';
+
+                var $context = $('.' + i);
+                $context.attr( 'title', $context.attr('title').replace(/[0-9]+%/g, val) );
+                $('.percent', $context).html(val);
+                $('.percentage-bar', $context).width(val);
+            });
+
         },
 
         // Summed maximum: Compatibility % = 100 * Abs(cos(pi * d / p))
@@ -102,7 +133,7 @@
             return compatibility;
         },
 
-        setLocationHash: function(inputValues) {
+        changeLocationHash: function(inputValues) {
             var hashData = [];
             $.each(inputValues, function(i, obj) {
                 hashData.push(obj.value);
@@ -111,19 +142,16 @@
             location.hash = hashData.join('');
         },
 
-        setDatesByHash: function() {
-            var hash = location.hash.slice(1);
-            var validHash = hash.match(/^(\d{8})-(\d{8})$/);
+        saveDate: function() {
 
-            if (validHash) {
-                $('select[name=dd]').val(hash.slice(0, 2));
-                $('select[name=mm]').val(hash.slice(2, 4));
-                $('select[name=yyyy]').val(hash.slice(4, 8));
-                $('select[name=dd2]').val(hash.slice(9, 11));
-                $('select[name=mm2]').val(hash.slice(11, 13));
-                $('select[name=yyyy2]').val(hash.slice(13, 17));
+        },
 
-                $('#date-input select').change();
+        // verify if local storage supported
+        supportsLocalStorage: function() {
+            try {
+                return 'localStorage' in window && window['localStorage'] !== null;
+            } catch(e) {
+                return false;
             }
         }
     };
