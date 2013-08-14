@@ -102,6 +102,7 @@ h3 {
     width: 100%;
     background: #a3abbe;
     -webkit-transition: width 0.6s ease;
+    -moz-transition: width 0.6s ease;
     transition: width 0.6s ease;
 }
 
@@ -126,6 +127,7 @@ h3 {
     padding: 10px;
     white-space: nowrap;
     -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
 
@@ -134,7 +136,7 @@ h3 {
 }
 
 .date select {
-    padding: 5px 15px;
+    padding: 5px 10px;
     margin: 0 5px;
     border-radius: 0;
     box-shadow: 0 1px 1px 0 #a3abbe inset;
@@ -143,12 +145,12 @@ h3 {
 }
 
 .date select:hover, .date select:focus {
-    color: #ef7955;
+    color: #4b98dc;
 }
 
 .separator {
     padding: 0 10px;
-    color: #ef7955;
+    color: #4b98dc;
     font-weight: bold;
     font-size: 1.5em;
     line-height: 1;
@@ -171,7 +173,7 @@ h3 {
 
 
 /* -- MEDIA QUERIES */
-@media only screen and (max-width: 660px) {
+@media only screen and (max-width: 750px) {
 
     .separator {
         display: block;
